@@ -3,12 +3,12 @@ console.log('JS connected'); // see if connected
 (() => {
     class Main { // Main class
         constructor() {
-            this.message = 'The Main class has been called!';
+            this.message = 'The Main class has been initialized!';
 
-            this.consoleLogMes();
+            this.init();
         }
 
-        consoleLogMes() {
+        init() {
             console.log(this.message);
         }
     }  
@@ -19,7 +19,7 @@ console.log('JS connected'); // see if connected
         }
 
         calculatePay() {
-            
+
         }
         
     }
