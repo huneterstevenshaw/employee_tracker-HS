@@ -17,6 +17,10 @@ console.log('JS connected'); // see if connected
         constructor() {
 
         }
+
+        calculatePay() {
+            
+        }
         
     }
 
