@@ -1,7 +1,7 @@
 'use strict';
 console.log('JS connected'); // see if connected
 (() => {
-    class Main {
+    class Main { // Main class
         constructor() {
             this.message = 'The Main class has been called!';
 
@@ -13,5 +13,26 @@ console.log('JS connected'); // see if connected
         }
     }  
 
-    const main = new Main();
+    class Employee { // Employee class
+        constructor() {
+
+        }
+        
+    }
+
+    class PartTime extends Employee { // PartTime class with properties of Employee class
+        constructor() {
+            
+        }
+
+    }
+
+    class Manager extends Employee { // Manager class with properties of Employee class
+        constructor() {
+            
+        }
+
+    }
+
+    const main = new Main(); // call main class
 })();
