@@ -1,15 +1,23 @@
 'use strict';
-console.log('JS connected'); // see if connected
+console.info('JS connected'); // see if connected
+
+/* Dev References >>>
+    1) Console API / Instance methods
+        a) https://developer.mozilla.org/en-US/docs/Web/API/console
+        b) https://developer.mozilla.org/en-US/docs/Web/API/console#outputting_text_to_the_console
+
+*/
 (() => {
     class Main { // Main class
         constructor() {
-            this.message = 'The Main class has been initialized!';
+            this.isInit = false; // state management 
 
             this.init();
         }
 
         init() {
-            console.log(this.message);
+            this.isInit = true;
+            console.info('Main class initialized:', this.isInit);
         }
     }  
 
