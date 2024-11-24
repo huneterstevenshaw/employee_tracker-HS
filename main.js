@@ -7,6 +7,10 @@ console.info('JS connected'); // see if connected
         b) https://developer.mozilla.org/en-US/docs/Web/API/console#outputting_text_to_the_console
     2) String.split() method
         a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+    3) NaN and Error Handling
+        a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
+    4) Switch Expressions/Statements
+        a) https://www.w3schools.com/js/js_switch.asp
 
 */
 (() => {
@@ -14,49 +18,100 @@ console.info('JS connected'); // see if connected
         constructor() {
             this.isInit = false; // state management 
             this.employees = []; // make an empty array for the employees
-            const test = new PartTime(1, 2, 3, 4, 12, 40, 7);
+            this.selectionStateMana = 0; // state management for selections/app
+            this.whereAmI = null; 
 
-            const testFullTime = new Manager(1, 2, 3, 4, 12, 40, 7);
+            // const test = new PartTime(1, 2, 3, 4, 12, 40, 7);
+            // const testFullTime = new Manager(1, 2, 3, 4, 12, 40, 7);
 
-            console.log(test.calculatePay(), "PartTime");
-            console.log(testFullTime.calculatePay(), "Manager"); // test
+            // test
+            // console.log(test.calculatePay(), "PartTime");
+            // console.log(testFullTime.calculatePay(), "Manager"); 
             this.init();
         }
 
         init() {
             this.isInit = true;
-            console.info('Main class initialized:', this.isInit); // 1 a-b
+            console.info('Main class initialized:', this.isInit); // >>> 1 a-b
 
             // id, name, age, salary, hrs, payRate, Type, 40, 10, "Manager"
             this.employees.push(new Manager(1, 'Hunter', 28, 19800, 40, 10, "Full Time"));
             this.employees.push(new PartTime(2, 'Dave', 40, 19344, 31, 12, "Part Time"));
             this.employees.push(new Manager(3, 'Karol', 27, 19800, 40, 10, "Full Time"));
             
-            console.table(this.employees);
-            // this.getEmployeeInfo();
+            this.stateMana(); // call main menu on init
         }
 
         addEmployee() {
-
+            console.log("State Management >>>", this.whereAmI);
         }
 
         deleteEmployee() {
+            console.log("State Management >>>", this.whereAmI);
             // fliter()
-
-            // console.clear() to reset data before showing the array again
         }
 
         modifyEmployee() {
-
+            console.log("State Management >>>", this.whereAmI);
         }
 
         getEmployeeInfo() {
-            console.clear();
-            console.table(this.employees);
+            console.clear(); // clear before running again
+            this.stateMana();
         }
 
         showMainMenu() {
-            // const getSelection = 
+            // this.getEmployeeInfo();
+            console.log("State Management >>>", this.whereAmI);
+            const getSelection = prompt(
+                `
+                1. Add Employee
+                2. Remove Employee
+                3. Edit Employee
+                4. Display All Employees
+                `
+            ); // main menu for all the methods
+
+            const filterInput = parseInt(getSelection);
+            console.log(filterInput);
+
+            if ( filterInput > 4 || isNaN(filterInput) ||  filterInput < 1) { // 3 a
+                console.error("That's not a valid selection, try again.", filterInput);
+            } else {
+                this.selectionStateMana = filterInput;
+                this.getEmployeeInfo();
+            }
+        }
+
+        stateMana() { // state management for selections/app
+            // Switch Case Statement for state mana >>> 4 a
+            switch (this.selectionStateMana) {
+                case 0:
+                    this.whereAmI = "Main Menu";
+                    console.table(this.employees);
+                    this.showMainMenu();
+                    break; // needed or you will get a stack over flow, infinite loop (sad face)
+                case 1:
+                    this.whereAmI = "Add Employee";
+                    console.table(this.employees);
+                    this.addEmployee(); // open menus >>> call methods based on the state mana
+                    break;
+                case 2:
+                    this.whereAmI = "Remove Employee";
+                    console.table(this.employees);
+                    this.deleteEmployee();
+                    break;
+                case 3:
+                    this.whereAmI = "Edit Employee";
+                    console.table(this.employees);
+                    this.modifyEmployee();
+                    break;
+                case 4:
+                    this.whereAmI = "Display All Employees";
+                    console.table(this.employees);
+                    console.log("State Management >>>", this.whereAmI);
+                    break;
+            }
         }
     }  
 
