@@ -5,6 +5,8 @@ console.info('JS connected'); // see if connected
     1) Console API / Instance methods
         a) https://developer.mozilla.org/en-US/docs/Web/API/console
         b) https://developer.mozilla.org/en-US/docs/Web/API/console#outputting_text_to_the_console
+    2) String.split() method
+        a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
 
 */
 (() => {
@@ -17,7 +19,7 @@ console.info('JS connected'); // see if connected
             const testFullTime = new Manager(1, 2, 3, 4, 12, 40, 7);
 
             console.log(test.calculatePay(), "PartTime");
-            console.log(testFullTime.calculatePay(), "Manager");
+            console.log(testFullTime.calculatePay(), "Manager"); // test
             this.init();
         }
 
@@ -26,13 +28,12 @@ console.info('JS connected'); // see if connected
             console.info('Main class initialized:', this.isInit); // 1 a-b
 
             // id, name, age, salary, hrs, payRate, Type, 40, 10, "Manager"
-            this.employees.push(new Manager(1, 'Hunter', 28, `$${500000}`, 40, 10, "Manager"));
-            this.employees.push(new PartTime(2, 'Dave', 44, `$${40000}`, 12, 10, "Manager"));
-            this.employees.push(new Manager(3, 'Karol', 27, `$${500000}`, 40, 10, "Manager"));
+            this.employees.push(new Manager(1, 'Hunter', 19800, 40, 10, "Full Time"));
+            this.employees.push(new PartTime(2, 'Dave', 19344, 31, 12, "Part Time"));
+            this.employees.push(new Manager(3, 'Karol', 19800, 40, 10, "Full Time"));
             
             console.table(this.employees);
-
-            this.showAllEmployees();
+            // this.showAllEmployees();
         }
 
         addEmployee() {
@@ -51,62 +52,62 @@ console.info('JS connected'); // see if connected
              
         }
 
-        showAllEmployees() {
-            console.info('All employees:'); // all employees headers
-            this.employees.forEach((employee) => {
-                console.table(this.getEmployeeDetails(employee));
-            });
-        }
+        // showAllEmployees() {
+        //     console.info('All employees:'); // all employees headers
+        //     this.employees.forEach((employee) => {
+        //         push(this.getEmployeeDetails(employee));
+        //     });
+        // }
 
-        getEmployeeDetails(employee) {
-            const details = {
-                ID: employee.id,
-                Name: employee.name,
-                Age: employee.age,
-                Salary: `$${employee.salary}`,
-                Hours: `${employee.payRate}`,
-                Pay: `${employee.payRate}`,
-                Hours: `${employee.payRate}`,
+        // getEmployeeDetails(employee) {
+        //     const details = {
+        //         ID: employee.id,
+        //         Name: employee.name,
+        //         Age: employee.age,
+        //         Salary: `$${employee.salary}`,
+        //         Hours: `${employee.payRate}`,
+        //         Pay: `${employee.payRate}`,
+        //         Hours: `${employee.payRate}`,
 
-            };
+        //     };
 
-            return details;
-        }
+        //     return details;
+        // }
     }  
 
     class Employee { // Employee class
-        constructor(id, name, age, salary) {
-            this.id = id;
-            this.employeeName = name; 
-            this.employeeAge = age;
-            this.annualSalary = salary;
+        constructor(id, name, salary) {
+            this.ID = id;
+            this.Name = name; 
+            this.Salary = salary;
         }
     }
 
     class PartTime extends Employee { // PartTime class with properties of Employee class
-        constructor(id, name, age, salary, hrs, payRate, Type) {
-            super(id, name, age, salary); // call all instance variables within the Employee class
-            this.hrs = hrs;
-            this.payRate = payRate;
-            this.position = Type;
+        constructor(id, name, salary, hrs, payRate, Type) {
+            super(id, name, salary); // call all instance variables within the Employee class
+            this.HrsWorked = hrs;
+            this.Pay = payRate;
+            this.PositonType = Type;
         }
 
         calculatePay() { // calcuate payRate method for PartTime
             const weeksInYear = 52;
-            return(this.payRate * this.hrs * weeksInYear);
+            return(this.HrsWorked * this.hrs * weeksInYear);
         }
     }
 
     class Manager extends Employee { // Manager class with properties of Employee class
-        constructor(id, name, age, salary, payRate, Type) {
-            super(id, name, age, salary); // call all instance variables within the Employee class
-            this.payRate = payRate;
-            this.position = Type;
+        constructor(id, name, salary, hoursWorked, pay, Type) {
+            super(id, name, salary); // call all instance variables within the Employee class
+            this.HrsWorked = hoursWorked;
+            this.Pay = pay;
+            this.PositonType = Type;
         }
 
         calculatePay() { // calcuate pay method for Manager
             const weeksInYear = 52;
-            const hoursPerWeek = 40;
+            const hoursPerWeek =  40;
 
             return((this.payRate * hoursPerWeek * weeksInYear) - 1000);
         }
