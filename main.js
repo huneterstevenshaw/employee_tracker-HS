@@ -28,12 +28,12 @@ console.info('JS connected'); // see if connected
             console.info('Main class initialized:', this.isInit); // 1 a-b
 
             // id, name, age, salary, hrs, payRate, Type, 40, 10, "Manager"
-            this.employees.push(new Manager(1, 'Hunter', 19800, 40, 10, "Full Time"));
-            this.employees.push(new PartTime(2, 'Dave', 19344, 31, 12, "Part Time"));
-            this.employees.push(new Manager(3, 'Karol', 19800, 40, 10, "Full Time"));
+            this.employees.push(new Manager(1, 'Hunter', 28, 19800, 40, 10, "Full Time"));
+            this.employees.push(new PartTime(2, 'Dave', 40, 19344, 31, 12, "Part Time"));
+            this.employees.push(new Manager(3, 'Karol', 27, 19800, 40, 10, "Full Time"));
             
             console.table(this.employees);
-            // this.showAllEmployees();
+            // this.getEmployeeInfo();
         }
 
         addEmployee() {
@@ -41,7 +41,9 @@ console.info('JS connected'); // see if connected
         }
 
         deleteEmployee() {
-            
+            // fliter()
+
+            // console.clear() to reset data before showing the array again
         }
 
         modifyEmployee() {
@@ -49,46 +51,33 @@ console.info('JS connected'); // see if connected
         }
 
         getEmployeeInfo() {
-             
+            console.clear();
+            console.table(this.employees);
         }
 
-        // showAllEmployees() {
-        //     console.info('All employees:'); // all employees headers
-        //     this.employees.forEach((employee) => {
-        //         push(this.getEmployeeDetails(employee));
-        //     });
-        // }
-
-        // getEmployeeDetails(employee) {
-        //     const details = {
-        //         ID: employee.id,
-        //         Name: employee.name,
-        //         Age: employee.age,
-        //         Salary: `$${employee.salary}`,
-        //         Hours: `${employee.payRate}`,
-        //         Pay: `${employee.payRate}`,
-        //         Hours: `${employee.payRate}`,
-
-        //     };
-
-        //     return details;
-        // }
+        showMainMenu() {
+            // const getSelection = 
+        }
     }  
 
     class Employee { // Employee class
-        constructor(id, name, salary) {
-            this.ID = id;
+        constructor(id, name, age, salary) {
+            this.EmployeeID = id;
             this.Name = name; 
+            this.Age = age;
             this.Salary = salary;
         }
     }
 
     class PartTime extends Employee { // PartTime class with properties of Employee class
-        constructor(id, name, salary, hrs, payRate, Type) {
-            super(id, name, salary); // call all instance variables within the Employee class
+        constructor(id, name, age, salary, hrs, payRate, type) {
+            super(id, name, age, salary); // call all instance variables within the Employee class
             this.HrsWorked = hrs;
-            this.Pay = payRate;
-            this.PositonType = Type;
+            this.PayPerHour = payRate;
+            this.PositonType = type;
+
+            // this.employees.push(new Manager(1, 'Hunter', 28, 19800, 40, 10, "Full Time"));
+            // this.employees.push(new PartTime(2, 'Dave', 40, 19344, 31, 12, "Part Time"));
         }
 
         calculatePay() { // calcuate payRate method for PartTime
@@ -98,18 +87,18 @@ console.info('JS connected'); // see if connected
     }
 
     class Manager extends Employee { // Manager class with properties of Employee class
-        constructor(id, name, salary, hoursWorked, pay, Type) {
-            super(id, name, salary); // call all instance variables within the Employee class
+        constructor(id, name, age, salary, hoursWorked, pay, type) {
+            super(id, name, age, salary); // call all instance variables within the Employee class
             this.HrsWorked = hoursWorked;
-            this.Pay = pay;
-            this.PositonType = Type;
+            this.PayPerHour = pay;
+            this.PositonType = type;
         }
 
         calculatePay() { // calcuate pay method for Manager
             const weeksInYear = 52;
             const hoursPerWeek =  40;
 
-            return((this.payRate * hoursPerWeek * weeksInYear) - 1000);
+            return((this.payRate * hoursPerWeek * weeksInYear) - 1000); // -$1000 for benefits
         }
     }
 
