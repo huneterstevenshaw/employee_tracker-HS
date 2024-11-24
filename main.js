@@ -12,7 +12,9 @@ console.info('JS connected'); // see if connected
         constructor() {
             this.isInit = false; // state management 
             this.employees = []; // make an empty array for the employees
-            console.log(new PartTime(1,1,1,1,1,1,1));
+            const test = new PartTime(1, 2, 3, 4, 12, 40, 7);
+
+            console.log(test.calculatePay());
             this.init();
         }
 
@@ -20,11 +22,12 @@ console.info('JS connected'); // see if connected
             this.isInit = true;
             console.info('Main class initialized:', this.isInit); // 1 a-b
 
-            this.employees.push(new Employee(1, 'Hunter', 28, ));
-            this.employees.push(new Employee(2, 'Dave', 44, ));
-            this.employees.push(new Employee(3, 'Karol', 27, ));
+            this.employees.push(new Employee(1, 'Hunter', 28, `$${500000}`));
+            this.employees.push(new Employee(2, 'Dave', 44, `$${40000}`));
+            this.employees.push(new Employee(3, 'Karol', 27, `$${500000}`));
 
             console.table(this.employees);
+
         }
 
         addEmployee() {
@@ -56,9 +59,9 @@ console.info('JS connected'); // see if connected
                 Name: employee.name,
                 Age: employee.age,
                 Salary: `$${employee.salary}`,
-                Hours: `${employee.hrs}`,
-                Pay: `${employee.hrs}`,
-                Hours: `${employee.hrs}`,
+                Hours: `${employee.payRate}`,
+                Pay: `${employee.payRate}`,
+                Hours: `${employee.payRate}`,
 
             };
 
@@ -67,32 +70,34 @@ console.info('JS connected'); // see if connected
     }  
 
     class Employee { // Employee class
-        constructor(id, name, age, salary, hrs, hourlyPay, partOrFull) {
+        constructor(id, name, age, salary) {
             this.id = id;
             this.employeeName = name; 
             this.employeeAge = age;
             this.annualSalary = salary;
-            this.hoursInWeek = hrs;
-            this.payPerHour = hourlyPay
-            this.positionType = partOrFull;
         }
     }
 
     class PartTime extends Employee { // PartTime class with properties of Employee class
-        constructor(id, name, age, salary, hrs, hourlyPay, partOrFull) {
-            super(id, name, age, salary, hrs, hourlyPay, partOrFull);
+        constructor(id, name, age, salary, hrs, payRate, Type) {
+            super(id, name, age, salary); // call all instance variables within the Employee class
+            this.hrs = hrs;
+            this.payRate = payRate;
+            this.position = Type;
         }
 
-        calculatePay() { // calcuate pay method for PartTime
+        calculatePay() { // calcuate payRate method for PartTime
             const weeksInYear = 52;
-            
-            // super.salary = 52 * 
+            return(this.payRate * this.hrs * weeksInYear);
         }
     }
 
     class Manager extends Employee { // Manager class with properties of Employee class
-        constructor() {
-            
+        constructor(id, name, age, salary, payRate, Type) {
+            super(id, name, age, salary); // call all instance variables within the Employee class
+            this.payRate = payRate;
+            this.position = Type;
+
         }
 
         calculatePay() { // calcuate pay method for Manager
