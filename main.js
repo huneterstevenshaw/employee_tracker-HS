@@ -14,7 +14,10 @@ console.info('JS connected'); // see if connected
             this.employees = []; // make an empty array for the employees
             const test = new PartTime(1, 2, 3, 4, 12, 40, 7);
 
-            console.log(test.calculatePay());
+            const testFullTime = new Manager(1, 2, 3, 4, 12, 40, 7);
+
+            console.log(test.calculatePay(), "PartTime");
+            console.log(testFullTime.calculatePay(), "Manager");
             this.init();
         }
 
@@ -22,12 +25,14 @@ console.info('JS connected'); // see if connected
             this.isInit = true;
             console.info('Main class initialized:', this.isInit); // 1 a-b
 
-            this.employees.push(new Employee(1, 'Hunter', 28, `$${500000}`));
-            this.employees.push(new Employee(2, 'Dave', 44, `$${40000}`));
-            this.employees.push(new Employee(3, 'Karol', 27, `$${500000}`));
-
+            // id, name, age, salary, hrs, payRate, Type, 40, 10, "Manager"
+            this.employees.push(new Manager(1, 'Hunter', 28, `$${500000}`, 40, 10, "Manager"));
+            this.employees.push(new PartTime(2, 'Dave', 44, `$${40000}`, 12, 10, "Manager"));
+            this.employees.push(new Manager(3, 'Karol', 27, `$${500000}`, 40, 10, "Manager"));
+            
             console.table(this.employees);
 
+            this.showAllEmployees();
         }
 
         addEmployee() {
@@ -97,11 +102,13 @@ console.info('JS connected'); // see if connected
             super(id, name, age, salary); // call all instance variables within the Employee class
             this.payRate = payRate;
             this.position = Type;
-
         }
 
         calculatePay() { // calcuate pay method for Manager
-            
+            const weeksInYear = 52;
+            const hoursPerWeek = 40;
+
+            return((this.payRate * hoursPerWeek * weeksInYear) - 1000);
         }
     }
 
