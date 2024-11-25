@@ -9,6 +9,7 @@ console.info('JS connected'); // see if connected
         a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
     3) NaN and Error Handling
         a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
+        b) https://stackoverflow.com/questions/175739/how-can-i-check-if-a-string-is-a-valid-number
     4) Switch Expressions/Statements
         a) https://www.w3schools.com/js/js_switch.asp
 
@@ -20,6 +21,8 @@ console.info('JS connected'); // see if connected
             this.employees = []; // make an empty array for the employees
             this.selectionStateMana = 0; // state management for selections/app
             this.whereAmI = null; 
+            this.setId = 3;
+            this.isFullTime = 0;
 
             // const test = new PartTime(1, 2, 3, 4, 12, 40, 7);
             // const testFullTime = new Manager(1, 2, 3, 4, 12, 40, 7);
@@ -42,8 +45,61 @@ console.info('JS connected'); // see if connected
             this.stateMana(); // call main menu on init
         }
 
+        // this.employees.push(new Manager(1, 'Hunter', 28, 19800, 40, 10, "Full Time"));
+        // this.employees.push(new PartTime(2, 'Dave', 40, 19344, 31, 12, "Part Time"));
+
         addEmployee() {
             console.log("State Management >>>", this.whereAmI);
+
+            const addNew = prompt(`
+                ATTENTION: Please enter the new user in the following format:
+
+                "name,age,hrsWorkedPerWeek,payPerHour
+            `); // main menu for all the methods
+
+            if (isNaN(addNew)) {
+                const addNewSplit = addNew.split(',');
+                console.log("Added New User!:", addNewSplit);
+                
+                let name = addNewSplit[0];
+                let age = parseInt(addNewSplit[1]);
+                let weeklyHrs =  parseInt(addNewSplit[2]);
+                let payRate = parseInt(addNewSplit[3]);
+    
+    
+    
+    
+                // const name = addNewSplit[0]
+                // const age = addNewSplit[1]
+                // const weeklyHrs = addNewSplit[2]
+                // const payRate = addNewSplit[3]
+                // const salary = 52 * weeklyHrs * payRate
+                // John,23,40,32
+                if ( !isNaN(age) ) { // >>> 3 b
+                    this.setId += 1;
+                    console.log(this.setId, "Here is the ID");
+                }
+                let isFullTime = 'Part Time';
+                // check to see if part time or manager
+                if (weeklyHrs >= 40) {
+                    this.isFullTime = 1; 
+                    // const name = addNewSplit[0]
+                    // const age = addNewSplit[1]
+                    // const weeklyHrs = addNewSplit[2]
+                    // const payRate = addNewSplit[3]
+                    // const salary = 52 * weeklyHrs * payRate
+                    
+                // this.employees.push(new Manager(1, 'Hunter', 28, 19800, 40, 10, "Full Time"));
+                // this.employees.push(new PartTime(2, 'Dave', 40, 19344, 31, 12, "Part Time"));
+    
+                    // this.employees.push(new Manager(this.setId, name, age, addNewSplit[2], addNewSplit[3]))
+    
+                    return;
+                } 
+    
+                // logic for part time
+                // this.employees.push(new PartTime(addNewSplit[0], addNewSplit[1], addNewSplit[2], addNewSplit[3]))
+            }
         }
 
         deleteEmployee() {
@@ -63,6 +119,7 @@ console.info('JS connected'); // see if connected
         showMainMenu() {
             // this.getEmployeeInfo();
             console.log("State Management >>>", this.whereAmI);
+
             const getSelection = prompt(
                 `
                 1. Add Employee
