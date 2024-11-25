@@ -12,6 +12,8 @@ console.info('JS connected'); // see if connected
         b) https://stackoverflow.com/questions/175739/how-can-i-check-if-a-string-is-a-valid-number
     4) Switch Expressions/Statements
         a) https://www.w3schools.com/js/js_switch.asp
+    5) Filter user 
+        a) https://stackoverflow.com/questions/44628965/filtering-numbers-out-from-an-array
 
 */
 (() => {
@@ -52,9 +54,9 @@ console.info('JS connected'); // see if connected
             console.log("State Management >>>", this.whereAmI);
 
             const addNew = prompt(`
-                ATTENTION: New user in the following format:
+                ADD >>> New user in the following format:
 
-                "name,age,hrsWorkedPerWeek,payPerHour
+                "name,age,hrsWorkedPerWeek,payPerHour"
             `); // main menu for all the methods
 
             if (isNaN(addNew)) {
@@ -111,6 +113,55 @@ console.info('JS connected'); // see if connected
         deleteEmployee() {
             console.log("State Management >>>", this.whereAmI);
             // fliter()
+
+            const deleteUser = prompt(`
+                DELETE >>> Enter user EmployeeID to delete:
+
+                "ex: 4:
+            `); // main menu for all the methods
+            
+            let getDeleteNum = parseInt(deleteUser);
+
+            // console.log(getDeleteNum);
+            // const deleteEmployee = this.employees.filter(user => {
+            //     return parseInt(user.EmployeeID) == getDeleteNum;
+            // });
+            // console.log(deleteEmployee);
+
+            if (!isNaN(getDeleteNum)) { // >>> 5 a
+                let userToDelete = this.employees.filter((user) => (user.EmployeeID == getDeleteNum));
+                let i = 0;
+                this.employees.forEach(element => {
+                    if (element.EmployeeID == userToDelete[0].EmployeeID) {
+                        this.employees = this.employees.toSpliced(i,1);
+                    }
+                    i+=1;
+                });
+                console.clear();
+                this.selectionStateMana = 0;
+                return this.stateMana();
+            };
+                // const deleteEmployee = this.employees.filter((user) => (user.EmployeeID == getDeleteNum));
+                // console.log(deleteEmployee);
+
+                // let getId = deleteEmployee[0].EmployeeID;
+
+                // for (let x in getId) {
+                //     if (x[0] === getId){
+                //         console.log(x[0], "x")
+                //     }
+                // };
+
+                // this.employees.forEach(emp => {
+                //     console.log(emp);
+                // })
+
+
+                // console.log(getId);
+
+            // console.clear();
+            // this.selectionStateMana = 0;
+            // return this.stateMana();
         }
 
         modifyEmployee() {
