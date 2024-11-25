@@ -5,8 +5,10 @@ console.info('JS connected'); // see if connected
     1) Console API / Instance methods
         a) https://developer.mozilla.org/en-US/docs/Web/API/console
         b) https://developer.mozilla.org/en-US/docs/Web/API/console#outputting_text_to_the_console
-    2) String.split() method
-        a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split
+    2) String.split() AND toSpiced method // NOT the same thing, split is from start to finish, toSpiced is INDEX value
+        a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split}
+        b) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+        c) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSpliced // .... this took hours
     3) NaN and Error Handling
         a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
         b) https://stackoverflow.com/questions/175739/how-can-i-check-if-a-string-is-a-valid-number
@@ -14,6 +16,12 @@ console.info('JS connected'); // see if connected
         a) https://www.w3schools.com/js/js_switch.asp
     5) Filter user 
         a) https://stackoverflow.com/questions/44628965/filtering-numbers-out-from-an-array
+    6) Arrays 
+        a) https://stackoverflow.com/questions/64800465/how-to-change-indexes-keys-an-array-of-object-in-javascript
+        b) https://www.shecodes.io/athena/53681-how-to-replace-an-item-in-an-array-in-javascript
+        c) https://stackoverflow.com/questions/44435141/remove-object-in-array-using-filter-and-splice-which-one-is-best-approach-in-jav
+        d) https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array-in-javascript
+
 
 */
 (() => {
@@ -57,7 +65,7 @@ console.info('JS connected'); // see if connected
                 ADD >>> New user in the following format:
 
                 "name,age,hrsWorkedPerWeek,payPerHour"
-            `); // main menu for all the methods
+            `); // add prompt
 
             if (isNaN(addNew)) {
                 const addNewSplit = addNew.split(',');
@@ -117,8 +125,8 @@ console.info('JS connected'); // see if connected
             const deleteUser = prompt(`
                 DELETE >>> Enter user EmployeeID to delete:
 
-                "ex: 4:
-            `); // main menu for all the methods
+                "ex: 4:"
+            `); // delete prompt
             
             let getDeleteNum = parseInt(deleteUser);
 
@@ -130,17 +138,18 @@ console.info('JS connected'); // see if connected
 
             if (!isNaN(getDeleteNum)) { // >>> 5 a
                 let userToDelete = this.employees.filter((user) => (user.EmployeeID == getDeleteNum));
-                let i = 0;
-                this.employees.forEach(element => {
-                    if (element.EmployeeID == userToDelete[0].EmployeeID) {
-                        this.employees = this.employees.toSpliced(i,1);
+                let i = 0; // needed this to find exact, because for each is looping thru
+                this.employees.forEach(user => { // new array
+                    if (user.EmployeeID == userToDelete[0].EmployeeID) {
+                        this.employees = this.employees.toSpliced(i,1); // >>> 2 c - turns into NEW array, so array = the same array
                     }
                     i+=1;
                 });
+                // reset
                 console.clear();
                 this.selectionStateMana = 0;
                 return this.stateMana();
-            };
+            }
                 // const deleteEmployee = this.employees.filter((user) => (user.EmployeeID == getDeleteNum));
                 // console.log(deleteEmployee);
 
@@ -166,6 +175,53 @@ console.info('JS connected'); // see if connected
 
         modifyEmployee() {
             console.log("State Management >>>", this.whereAmI);
+
+            const editUser = prompt(`
+                EDIT >>> Enter user EmployeeID to edit:
+
+                "ex: 4:"
+            `); // edit prompt
+
+            let getEditId = parseInt(editUser);
+
+            // let findId;
+            if (!isNaN(getEditId)) { // >>> 5 a
+                let userToEdit = this.employees.filter((user) => (user.EmployeeID == getEditId));
+                let i = 0; // needed this to find exact, because for each is looping thru
+                this.employees.map(user => { // new array
+                    if (user.Name == userToEdit[0].Name) {
+                        let index = this.employees.indexOf(i);
+
+                        this.employees[index] = 'changed'
+                    }
+                    i+=1;
+                });
+
+                console.log(this.employees);
+                // reset
+                // console.clear();
+                // this.selectionStateMana = 0;
+                // return this.stateMana();
+            };
+
+
+            if (isNaN(editUser)) {
+                const editNewSplit = editUser.split(',');
+                // console.log("Added New User!:", addNewSplit);
+                
+                let name = addNewSplit[0];
+                let age = parseInt(addNewSplit[1]);
+                let weeklyHrs =  parseInt(addNewSplit[2]);
+                let payRate = parseInt(addNewSplit[3]);
+                let isFullTime = 'Part Time';
+    
+                let salary = weeklyHrs * payRate * 52
+
+                // reset
+                console.clear();
+                this.selectionStateMana = 0;
+                return this.stateMana();
+            }
         }
 
         getEmployeeInfo() {
