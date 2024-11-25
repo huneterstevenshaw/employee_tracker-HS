@@ -52,51 +52,57 @@ console.info('JS connected'); // see if connected
             console.log("State Management >>>", this.whereAmI);
 
             const addNew = prompt(`
-                ATTENTION: Please enter the new user in the following format:
+                ATTENTION: New user in the following format:
 
                 "name,age,hrsWorkedPerWeek,payPerHour
             `); // main menu for all the methods
 
             if (isNaN(addNew)) {
                 const addNewSplit = addNew.split(',');
-                console.log("Added New User!:", addNewSplit);
+                // console.log("Added New User!:", addNewSplit);
                 
                 let name = addNewSplit[0];
                 let age = parseInt(addNewSplit[1]);
                 let weeklyHrs =  parseInt(addNewSplit[2]);
                 let payRate = parseInt(addNewSplit[3]);
+                let isFullTime = 'Part Time';
     
-    
-    
+                let salary = weeklyHrs * payRate * 52
     
                 // const name = addNewSplit[0]
                 // const age = addNewSplit[1]
                 // const weeklyHrs = addNewSplit[2]
                 // const payRate = addNewSplit[3]
                 // const salary = 52 * weeklyHrs * payRate
-                // John,23,40,32
-                if ( !isNaN(age) ) { // >>> 3 b
+                // John,23,40,32 test info
+                if ( !isNaN(age) && weeklyHrs < 40) { // >>> 3 b
                     this.setId += 1;
                     console.log(this.setId, "Here is the ID");
-                }
-                let isFullTime = 'Part Time';
-                // check to see if part time or manager
-                if (weeklyHrs >= 40) {
+
+                    this.employees.push(new PartTime(this.setId, name, age, salary, weeklyHrs, payRate, isFullTime));
+                    console.clear();
+                    // console.log("State Management >>>", this.whereAmI);
+                    // console.table(this.employees);
+                    // check to see if part time or manager
+                   
+                } else {
                     this.isFullTime = 1; 
-                    // const name = addNewSplit[0]
-                    // const age = addNewSplit[1]
-                    // const weeklyHrs = addNewSplit[2]
-                    // const payRate = addNewSplit[3]
-                    // const salary = 52 * weeklyHrs * payRate
-                    
-                // this.employees.push(new Manager(1, 'Hunter', 28, 19800, 40, 10, "Full Time"));
-                // this.employees.push(new PartTime(2, 'Dave', 40, 19344, 31, 12, "Part Time"));
-    
-                    // this.employees.push(new Manager(this.setId, name, age, addNewSplit[2], addNewSplit[3]))
-    
-                    return;
-                } 
-    
+                    this.setId += 1;
+                        isFullTime = "Full Time"
+                        salary = (weeklyHrs * payRate * 52) - 1000;
+                        
+                    // this.employees.push(new Manager(1, 'Hunter', 28, 19800, 40, 10, "Full Time"));
+                    // this.employees.push(new PartTime(2, 'Dave', 40, 19344, 31, 12, "Part Time"));
+        
+                        // this.employees.push(new Manager(this.setId, name, age, addNewSplit[2], addNewSplit[3]))
+                        this.employees.push(new Manager(this.setId, name, age, salary, weeklyHrs, payRate, isFullTime));
+                        console.clear();
+                        // console.log("State Management >>>", this.whereAmI);
+                        // console.table(this.employees);
+                }
+
+                this.selectionStateMana = 0;
+                return this.stateMana();
                 // logic for part time
                 // this.employees.push(new PartTime(addNewSplit[0], addNewSplit[1], addNewSplit[2], addNewSplit[3]))
             }
