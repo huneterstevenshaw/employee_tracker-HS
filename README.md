@@ -341,3 +341,29 @@ console.info('JS connected'); // see if connected
     const main = new Main(); // call Main class
 })();
 ```
+
+### Documentation That Helped Me - Reading, Reading, Reading...
+
+```javascript
+Dev References >>>
+    1) Console API / Instance methods
+        a) https://developer.mozilla.org/en-US/docs/Web/API/console
+        b) https://developer.mozilla.org/en-US/docs/Web/API/console#outputting_text_to_the_console
+    2) String.split() AND toSpiced method // NOT the same thing, split is from start to finish, toSpiced is INDEX value
+        a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split}
+        b) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+        c) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSpliced // .... this took hours
+    3) NaN and Error Handling
+        a) https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN
+        b) https://stackoverflow.com/questions/175739/how-can-i-check-if-a-string-is-a-valid-number
+    4) Switch Expressions/Statements
+        a) https://www.w3schools.com/js/js_switch.asp
+    5) Filter user 
+        a) https://stackoverflow.com/questions/44628965/filtering-numbers-out-from-an-array
+    6) Arrays 
+        a) https://stackoverflow.com/questions/64800465/how-to-change-indexes-keys-an-array-of-object-in-javascript
+        b) https://www.shecodes.io/athena/53681-how-to-replace-an-item-in-an-array-in-javascript
+        c) https://stackoverflow.com/questions/44435141/remove-object-in-array-using-filter-and-splice-which-one-is-best-approach-in-jav
+        d) https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array-in-javascript
+
+```
